@@ -1,25 +1,37 @@
- <!-- Login Form -->
- <form>
+ <!-- Login Form: ngForm is auto-applied to this form because Formsmodule was imported and it fuslfills the css-selector: form:not([ngNoForm]):not([formGroup]). This directive then auto-creates an instance of FormGroup-->
+ <form #loginForm="ngForm" (ngSubmit)="login()">
+    <!--assign ngForm-object to template variable #loginForm to make it accesible-->
     <!-- Email -->
     <div class="mb-3">
       <label class="inline-block mb-2">Email</label>
-      <input type="email"
+      <!--ngModel creates an instance of FormControl-->
+      <!--two way binding: [(ngModel)] is the same as [value]="..." (change)="..." ngModel-->
+      <!--assign ngModel-object to template variable #email to make it accesible-->
+      <input #email="ngModel" type="email" name="email" [(ngModel)]="credentials.email" 
         class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
           duration-500 focus:outline-none rounded bg-transparent
           focus:border-indigo-400"
-        placeholder="Enter Email" />
-    </div>
+        placeholder="Enter Email" 
+        required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"/>
+        <!--behing the scenes Angular will convert validation attibutes into Validator instances (does not work for all validations yet)-->
+        <p *ngIf="email.dirty && email.touched && email.invalid" class="text-red-400">invalid email</p>
+     </div>
     <!-- Password -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Password</label>
-      <input type="password"
+      <label class="inline-block mb-2" >Password</label>
+      <input #password="ngModel" type="password" name="password"  [(ngModel)]="credentials.password"
         class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition
         duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
-        placeholder="Password" />
+        placeholder="Password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"/>
+      <p *ngIf="password.touched && password.dirty && password.invalid" class="text-red-400">
+        The password must contain at least 8 letter including at least 1 upper case and 1 lower case character
+      </p>
     </div>
+   
     <button type="submit"
       class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
-        hover:bg-indigo-500">
+        hover:bg-indigo-500 disabled:opacity-50 disabled:bg-indigo-400" 
+        [disabled]="loginForm.invalid"> 
       Submit
     </button>
   </form>
