@@ -1,4 +1,7 @@
- <!-- Login Form: ngForm is auto-applied to this form because Formsmodule was imported and it fuslfills the css-selector: form:not([ngNoForm]):not([formGroup]). This directive then auto-creates an instance of FormGroup-->
+
+<app-alert *ngIf="showAlert" [color]="alertColor">{{alertMessage}}</app-alert>
+
+<!-- Login Form: ngForm is auto-applied to this form because Formsmodule was imported and it fuslfills the css-selector: form:not([ngNoForm]):not([formGroup]). This directive then auto-creates an instance of FormGroup-->
  <form #loginForm="ngForm" (ngSubmit)="login()">
     <!--assign ngForm-object to template variable #loginForm to make it accesible-->
     <!-- Email -->
@@ -13,7 +16,7 @@
           focus:border-indigo-400"
         placeholder="Enter Email" 
         required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"/>
-        <!--behing the scenes Angular will convert validation attibutes into Validator instances (does not work for all validations yet)-->
+        <!--behind the scenes Angular will convert validation attibutes into Validator instances (does not work for all validations yet)-->
         <p *ngIf="email.dirty && email.touched && email.invalid" class="text-red-400">invalid email</p>
      </div>
     <!-- Password -->
@@ -31,7 +34,7 @@
     <button type="submit"
       class="block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition
         hover:bg-indigo-500 disabled:opacity-50 disabled:bg-indigo-400" 
-        [disabled]="loginForm.invalid"> 
+        [disabled]="loginForm.invalid||duringLogin"> 
       Submit
     </button>
   </form>

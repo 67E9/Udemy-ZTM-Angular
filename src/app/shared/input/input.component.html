@@ -44,4 +44,12 @@
       <p *ngIf="control.errors?.max" class = "text-red-400">
         Value too high. This cat is TOO old!
       </p>
+
+      <p *ngIf="control.errors?.notMatch" class="text-red-400">
+        Passwords do not match!
+      </p>
+
+      <p *ngIf="control.errors?.emailTaken" class="text-red-400">
+        This email is already taken!
+      </p>
     </ng-container>

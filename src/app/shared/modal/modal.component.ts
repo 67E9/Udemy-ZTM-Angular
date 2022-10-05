@@ -21,6 +21,7 @@ export class ModalComponent implements OnInit {
 
   ngOnDestroy(){
     this.modalService.unregister(this.modalId); //removes modal from service to prevent memory leak
+    document.body.removeChild(this.el.nativeElement);
   }
 
   closeModal(){

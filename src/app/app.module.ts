@@ -5,16 +5,35 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserModule } from './user/user.module';
 import { NavComponent } from './nav/nav.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component'
+import { VideoModule } from './video/video.module';
+import { ClipsComponent } from './clips/clips.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent
+    NavComponent,
+    HomeComponent,
+    AboutComponent,
+    ClipsComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    UserModule
+    UserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    VideoModule,
+    AngularFirestoreModule,
+    AppRoutingModule 
+    //AppRoutingModule should be imported last so that wildcard /** in app.routing.module 
+    //does not interfere with routing modules in other modules
   ],
   providers: [],
   bootstrap: [AppComponent]
