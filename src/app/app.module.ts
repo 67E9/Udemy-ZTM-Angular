@@ -11,7 +11,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component'
-import { VideoModule } from './video/video.module';
+//import { VideoModule } from './video/video.module'; //removed because video-module is lazy loaded in app-routing-module
 import { ClipsComponent } from './clips/clips.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ClipsListComponent } from './clips-list/clips-list.component';
@@ -33,7 +33,7 @@ import { FbTimestampPipe } from './pipes/fb-timestamp.pipe';
     UserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    VideoModule,
+    //VideoModule, //removed because video-module is lazy loaded in app-routing-module
     AngularFirestoreModule,
     AppRoutingModule 
     //AppRoutingModule should be imported last so that wildcard /** in app.routing.module 

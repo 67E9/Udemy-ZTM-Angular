@@ -4,6 +4,7 @@ import { AboutComponent } from './about/about.component';
 import { ClipsComponent } from './clips/clips.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ClipService } from './services/clip.service';
 
 const routes: Routes = [
   {
@@ -16,7 +17,15 @@ const routes: Routes = [
   },
   {
     path: 'clip/:id',
-    component: ClipsComponent
+    component: ClipsComponent,
+    resolve: {
+      clip: ClipService
+    }
+  },
+  {
+    path: '', //base path for all children below
+    loadChildren: async () => (await import('./video/video.module')).VideoModule
+    //lazily load video-module to enhance performance for users, who only watch but do not upload videos
   },
   {
     path: '**',
