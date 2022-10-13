@@ -91,4 +91,6 @@ under projects/clips/architect/serve add (enable cross-origin protection for ang
               "Cross-Origin-Embedder-Policy": "require-corp"
             }
           }
+
+in Vercel this must be set by using a vercel.json
 */ 
